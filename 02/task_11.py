@@ -22,8 +22,20 @@ def naive_gauss(A, b):
         x[i] = x[i] / S[i, i]
     return x
 
-A = np.array([1,2,-1,0,3,1,2,-1,1])
-A=A.reshape((3,3))
-b = np.array([2,4,2]).T
-x = naive_gauss(A,b)
-print(x)
+
+def create_hilbert_matrix(n):
+    H = np.zeros((n,n))
+    for i in range(1,n + 1):
+        for j in range(1,n + 1):
+            H[i - 1,j - 1] = 1.0 / (i + j - 1)
+    return H
+
+ns = [2, 5, 10]
+xs = []
+for n in ns:
+    H = create_hilbert_matrix(n)
+    b = np.ones(n)
+    x = naive_gauss(H, b)
+    # <-------------
+    xs.append(x)
+    bakoverfeil = (np.max(np.abs(np.dot(H, x) - b)))  # Om du var nysgjerrig :)

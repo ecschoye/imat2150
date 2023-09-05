@@ -14,16 +14,15 @@ def naive_gauss(A, b):
                 S[i, k] = S[i, k] - mult * S[j, k]
             S[i, -1] = S[i, -1] - mult * S[j, -1]
 
-    x = S[:, -1]
+    return S[:, 0:n], S[:, -1]
 
-    for i in range(n - 1, -1, -1):
-        for j in range(i + 1, n):
-            x[i] = x[i] - S[i, j] * x[j]
-        x[i] = x[i] / S[i, i]
-    return x
 
-A = np.array([1,2,-1,0,3,1,2,-1,1])
-A=A.reshape((3,3))
-b = np.array([2,4,2]).T
-x = naive_gauss(A,b)
-print(x)
+# Define the 3x3 matrix A and vector b
+A = np.array([[1.0, 2.0, -1.0],  # Example 3x3 matrix A
+              [0.0, 3.0, 1.0],
+              [2.0, -1.0, 1.0]])
+
+b = np.array([2.0, 4.0, 2.0]).T  # Example vector b
+
+Ar, br = naive_gauss(A, b)
+
