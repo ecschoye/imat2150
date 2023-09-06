@@ -10,7 +10,7 @@ def main():
     func = lambda x: 1 - np.cos(x)
     root = 0
     rad = 1
-    approx_root = 1.0E-4 * rad  # Set your desired value for rad here
+    approx_root = 1.0E-4 * rad
 
     forward_err = forward_error(root, approx_root)
     backward_err = backward_error(func, approx_root)
